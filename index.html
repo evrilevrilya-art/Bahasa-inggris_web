@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belajar 5 Bahasa</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: #2c7be5;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            padding: 20px;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            background: #2c7be5;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #1a68d1;
+        }
+        .lock {
+            color: red;
+            font-weight: bold;
+        }
+        footer {
+            text-align: center;
+            background: #ddd;
+            padding: 10px;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+        #paymentModal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 20px;
+        }
+        #paymentModal .modal-content {
+            background: #333;
+            padding: 20px;
+            border-radius: 10px;
+            width: 50%;
+            margin: auto;
+        }
+        .premium {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Belajar 5 Bahasa dengan Audio</h1>
+    <p>Belajar bahasa Inggris, Jepang, Korea, Arab, dan Spanyol</p>
+</header>
+
+<div class="container">
+    <!-- Status Langganan -->
+    <div class="card">
+        <h3>Status Langganan</h3>
+        <p id="status">Status: Belum berlangganan</p>
+        <button onclick="showPaymentOptions()">Berlangganan</button>
+        <button onclick="unsubscribe()">Batalkan Langganan</button>
+    </div>
+
+    <!-- 5 Bahasa Pembelajaran -->
+    <div class="card">
+        <h3>🇬🇧 Bahasa Inggris</h3>
+        <p>Pelajaran 1: Hello = Halo</p>
+        <audio controls>
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
+        </audio>
+        <button onclick="alert('1000 Pembelajaran tersedia di Bahasa Inggris')">Lihat Semua Pembelajaran</button>
+    </div>
+
+    <div class="card premium">
+        <h3>🇯🇵 Bahasa Jepang</h3>
+        <p>Pelajaran 1: こんにちは (Konnichiwa) = Halo</p>
+        <audio controls>
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mp3">
+        </audio>
+        <button onclick="alert('1000 Pembelajaran tersedia di Bahasa Jepang')">Lihat Semua Pembelajaran</button>
+    </div>
+
+    <div class="card premium">
+        <h3>🇰🇷 Bahasa Korea</h3>
+        <p>Pelajaran 1: 안녕하세요 (Annyeong) = Halo</p>
+        <audio controls>
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" type="audio/mp3">
+        </audio>
+        <button onclick="alert('1000 Pembelajaran tersedia di Bahasa Korea')">Lihat Semua Pembelajaran</button>
+    </div>
+
+    <div class="card premium">
+        <h3>🇸🇦 Bahasa Arab</h3>
+        <p>Pelajaran 1: مرحبا (Marhaban) = Halo</p>
+        <audio controls>
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3" type="audio/mp3">
+        </audio>
+        <button onclick="alert('1000 Pembelajaran tersedia di Bahasa Arab')">Lihat Semua Pembelajaran</button>
+    </div>
+
+    <div class="card premium">
+        <h3>🇪🇸 Bahasa Spanyol</h3>
+        <p>Pelajaran 1: Hola = Halo</p>
+        <audio controls>
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3" type="audio/mp3">
+        </audio>
+        <button onclick="alert('1000 Pembelajaran tersedia di Bahasa Spanyol')">Lihat Semua Pembelajaran</button>
+    </div>
+
+</div>
+
+<!-- Modal Payment Options -->
+<div id="paymentModal">
+    <div class="modal-content">
+        <h3>Pilih Paket Langganan</h3>
+        <button onclick="processPayment('daily')">Per Hari - $1</button>
+        <button onclick="processPayment('weekly')">Per Minggu - $5</button>
+        <button onclick="processPayment('monthly')">Per Bulan - $15</button>
+        <button onclick="processPayment('yearly')">Per Tahun - $150</button>
+        <button onclick="startFreeTrial()">Coba Gratis 7 Hari</button>
+        <button onclick="closePaymentModal()">Tutup</button>
+    </div>
+</div>
+
+<footer>
+    <p>© 2025 Belajar 5 Bahasa</p>
+</footer>
+
+<script>
+// Langganan Status
+let isSubscribed = localStorage.getItem("isSubscribed") === "true";
+updateSubscriptionStatus();
+
+// Pembayaran & Langganan
+function showPaymentOptions() {
+    if (!isSubscribed) {
+        document.getElementById("paymentModal").style.display = "block";
+    } else {
+        alert("Kamu sudah berlangganan premium!");
+    }
+}
+
+function closePaymentModal() {
+    document.getElementById("paymentModal").style.display = "none";
+}
+
+function processPayment(plan) {
+    alert("Pembayaran berhasil untuk " + plan);
+    localStorage.setItem("isSubscribed", "true");
+    isSubscribed = true;
+    updateSubscriptionStatus();
+    closePaymentModal();
+}
+
+function startFreeTrial() {
+    alert("Uji coba gratis selama 7 hari dimulai!");
+    localStorage.setItem("isSubscribed", "true");
+    isSubscribed = true;
+    updateSubscriptionStatus();
+    closePaymentModal();
+}
+
+// Status Langganan
+function updateSubscriptionStatus() {
+    if (isSubscribed) {
+        document.getElementById("status").innerText = "Status: Berlangganan Premium";
+        document.querySelectorAll(".premium").forEach((card) => {
+            card.style.display = "block";
+        });
+    } else {
+        document.getElementById("status").innerText = "Status: Belum Berlangganan";
+        document.querySelectorAll(".premium").forEach((card) => {
+            card.style.display = "none";
+        });
+    }
+}
+
+function unsubscribe() {
+    localStorage.setItem("isSubscribed", "false");
+    isSubscribed = false;
+    updateSubscriptionStatus();
+    alert("Langganan dibatalkan.");
+}
+</script>
+
+</body>
+</html>
+
+        
+                      
+          
