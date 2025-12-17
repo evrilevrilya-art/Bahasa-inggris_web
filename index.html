@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Belajar 5 Bahasa</title>
+    <title>Belajar 5 Bahasa dengan Audio</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -93,45 +93,35 @@
     <div class="card">
         <h3>🇬🇧 Bahasa Inggris</h3>
         <p>Pelajaran 1: Hello = Halo</p>
-        <audio controls>
-            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
-        </audio>
+        <button onclick="playAudio('Hello, Halo')">Dengarkan</button>
         <button onclick="alert('1000 Pembelajaran tersedia di Bahasa Inggris')">Lihat Semua Pembelajaran</button>
     </div>
 
     <div class="card premium">
         <h3>🇯🇵 Bahasa Jepang</h3>
         <p>Pelajaran 1: こんにちは (Konnichiwa) = Halo</p>
-        <audio controls>
-            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mp3">
-        </audio>
+        <button onclick="playAudio('Konnichiwa, Halo')">Dengarkan</button>
         <button onclick="alert('1000 Pembelajaran tersedia di Bahasa Jepang')">Lihat Semua Pembelajaran</button>
     </div>
 
     <div class="card premium">
         <h3>🇰🇷 Bahasa Korea</h3>
         <p>Pelajaran 1: 안녕하세요 (Annyeong) = Halo</p>
-        <audio controls>
-            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" type="audio/mp3">
-        </audio>
+        <button onclick="playAudio('Annyeong, Halo')">Dengarkan</button>
         <button onclick="alert('1000 Pembelajaran tersedia di Bahasa Korea')">Lihat Semua Pembelajaran</button>
     </div>
 
     <div class="card premium">
         <h3>🇸🇦 Bahasa Arab</h3>
         <p>Pelajaran 1: مرحبا (Marhaban) = Halo</p>
-        <audio controls>
-            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3" type="audio/mp3">
-        </audio>
+        <button onclick="playAudio('Marhaban, Halo')">Dengarkan</button>
         <button onclick="alert('1000 Pembelajaran tersedia di Bahasa Arab')">Lihat Semua Pembelajaran</button>
     </div>
 
     <div class="card premium">
         <h3>🇪🇸 Bahasa Spanyol</h3>
         <p>Pelajaran 1: Hola = Halo</p>
-        <audio controls>
-            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3" type="audio/mp3">
-        </audio>
+        <button onclick="playAudio('Hola, Halo')">Dengarkan</button>
         <button onclick="alert('1000 Pembelajaran tersedia di Bahasa Spanyol')">Lihat Semua Pembelajaran</button>
     </div>
 
@@ -209,11 +199,16 @@ function unsubscribe() {
     updateSubscriptionStatus();
     alert("Langganan dibatalkan.");
 }
+
+// Fungsi untuk memainkan audio menggunakan SpeechSynthesis
+function playAudio(text) {
+    const msg = new SpeechSynthesisUtterance(text);
+    window.speechSynthesis.speak(msg);
+}
 </script>
 
 </body>
 </html>
 
-        
-                      
-          
+  
+    
